@@ -56,20 +56,33 @@ themeToggle.addEventListener('click', () => {
     lucide.createIcons();
 });
 
-// --- Mobile sidebar ---
-if (mobileMenuBtn && sidebarOverlay && sidebar) {
-    mobileMenuBtn.addEventListener('click', () => {
-        sidebar.classList.add('open');
-        sidebarOverlay.classList.add('active');
-    });
-    sidebarOverlay.addEventListener('click', () => {
-        sidebar.classList.remove('open');
-        sidebarOverlay.classList.remove('active');
+// --- Sidebar open/close (same logic for desktop & mobile) ---
+function openSidebar() {
+    sidebar.classList.remove('collapsed');
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.add('active');
+}
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebar.classList.add('collapsed');
+    sidebarOverlay.classList.remove('active');
+}
+
+// Desktop hamburger toggle
+if (desktopToggle) {
+    desktopToggle.addEventListener('click', () => {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
 }
 
-if (desktopToggle) {
-    desktopToggle.addEventListener('click', () => sidebar.classList.toggle('collapsed'));
+// Mobile hamburger
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', openSidebar);
+}
+
+// Click overlay to close
+if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', closeSidebar);
 }
 
 // --- Welcome transition ---

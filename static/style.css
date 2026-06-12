@@ -88,19 +88,27 @@ a { color: var(--accent-color); text-decoration: none; }
 /* ── Sidebar ─────────────────────────────────────────────── */
 .sidebar {
     width: var(--sidebar-w);
-    min-width: var(--sidebar-w);
     background-color: var(--sidebar-bg);
     border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    z-index: 100;
-    transition: margin-left 0.3s ease;
+    z-index: 200;
     overflow-y: auto;
     overflow-x: hidden;
-    position: relative;
+    /* Always fixed overlay — same on desktop and mobile */
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: none;
 }
-.sidebar.collapsed { margin-left: calc(-1 * var(--sidebar-w)); }
+.sidebar.open {
+    transform: translateX(0);
+    box-shadow: 4px 0 20px rgba(37,99,235,0.12);
+}
+/* collapsed = alias for closed state (for JS compatibility) */
+.sidebar.collapsed { transform: translateX(-100%); }
 
 .sidebar-header {
     display: flex;
@@ -436,14 +444,8 @@ a { color: var(--accent-color); text-decoration: none; }
     .desktop-sidebar-toggle { display: none; }
     .mobile-header { display: flex; }
 
-    .sidebar {
-        position: fixed;
-        left: -280px; top: 0; bottom: 0;
-        width: 280px; z-index: 100;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-        transition: transform 0.3s ease;
-    }
-    .sidebar.open { transform: translateX(280px); }
+    /* Sidebar same overlay behavior — already handled above */
+    .sidebar.open { transform: translateX(0); box-shadow: 2px 0 10px rgba(0,0,0,0.2); }
 
     .chat-container { width: 100%; height: calc(100vh - 55px); height: calc(100dvh - 55px); }
     .welcome-content { transform: translateY(-40px); }
