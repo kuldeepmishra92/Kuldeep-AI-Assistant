@@ -28,6 +28,7 @@ from rag.vector_store    import (
 from rag.retriever       import invalidate_bm25_cache
 from orchestrator.graph  import run_chat
 from utils.logger        import get_logger
+from utils.knowledge_loader import download_knowledge_from_hf
 from keep_alive          import start_keep_alive
 
 logger = get_logger(__name__)
@@ -110,8 +111,9 @@ def auto_index_knowledge() -> None:
     else:
         logger.info("Auto-index complete. All files up to date.")
 
-# Run auto-indexing at startup
+# Run at startup: download private knowledge (HF) then index
 with app.app_context():
+    download_knowledge_from_hf()   # ← pulls from private HF Dataset (no-op locally)
     auto_index_knowledge()
 
 # ── Health check & keep-alive ping ──────────────────────────
