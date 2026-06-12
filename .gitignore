@@ -24,9 +24,9 @@ __pycache__/
 *.pyo
 .Python
 
-# ── Private Knowledge Base (NEVER commit — stored in private HF Dataset) ────
-# Files are downloaded at runtime via HF_TOKEN + HF_KNOWLEDGE_DATASET secret
-data/knowledge/
+# ── Private Knowledge Base ───────────────────────────────────────
+# Knowledge TXT files are committed and bundled in Docker image
+# so HuggingFace always has them — no external dependency needed
 data/uploads/
 !data/uploads/.gitkeep
 
