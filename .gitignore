@@ -1,11 +1,55 @@
-# ==============================================================
-# Python
-# ==============================================================
+# ================================================================
+#  .gitignore — Kuldeep AI Personal Chatbot
+#  ✅ KEEP: All source code, configs, templates, static assets
+#  ❌ IGNORE: Secrets, personal data, venv, generated files
+# ================================================================
+
+# ── Secrets & API Keys (NEVER commit) ───────────────────────────
+.env
+# Keep the example file (safe to commit)
+!.env.example
+
+# ── Virtual Environments ─────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ── Python Cache ─────────────────────────────────────────────────
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+*.pyo
 .Python
+
+# ── Private Knowledge Base ───────────────────────────────────────
+# ✅ knowledge/ TXT files ARE committed — they're bundled in Docker
+#    so HuggingFace never loses them on restart
+# ❌ uploads/ stays ignored — those are user-uploaded at runtime
+data/uploads/
+!data/uploads/.gitkeep
+
+# ── Auto-generated Vector Store (rebuilt on startup from knowledge/) ─
+data/chroma_db/
+chroma_db/
+vector_store/
+
+# ── Auto-generated Database (recreated on startup) ───────────────
+data/chat_memory.db
+data/*.db
+*.db
+*.sqlite3
+
+# ── Logs (runtime generated) ─────────────────────────────────────
+logs/
+*.log
+*.tmp
+
+# ── Temp & Build Artifacts ───────────────────────────────────────
+tmp/
+temp/
 build/
 dist/
 *.egg-info/
@@ -13,60 +57,18 @@ dist/
 MANIFEST
 .installed.cfg
 
-# ==============================================================
-# Virtual Environments
-# ==============================================================
-.venv/
-venv/
-env/
-ENV/
-
-# ==============================================================
-# Secrets & API Keys (NEVER commit these)
-# ==============================================================
-.env
-.streamlit/
-*.toml
-
-# ==============================================================
-# Deployment configs (platform-specific — not needed in repo)
-# ==============================================================
-vercel.json
-
-# ==============================================================
-# Project Data (auto-generated at runtime)
-# ==============================================================
-data/
-*.db
-*.sqlite3
-chroma_db/
-vector_store/
-logs/
-tmp/
-temp/
-
-# ==============================================================
-# Internal Planning & Dev Notes (keep private)
-# ==============================================================
-PLAN.md
-TODO.md
-NOTES.md
-*.draft.md
-
-# ==============================================================
-# IDEs
-# ==============================================================
+# ── IDE & Editor files ───────────────────────────────────────────
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
 .project
 .pydevproject
 .settings/
 
-# ==============================================================
-# OS generated files
-# ==============================================================
+# ── OS generated files ───────────────────────────────────────────
 .DS_Store
 .DS_Store?
 ._*
@@ -74,9 +76,38 @@ NOTES.md
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# ==============================================================
-# Logs and Temp files
-# ==============================================================
-*.log
-*.tmp
+# ── Reference images (local design assets, not needed in repo) ───
+reference/
+
+# ── Test files ───────────────────────────────────────────────────
+test.html
+
+# ================================================================
+#  ✅ FILES THAT ARE TRACKED (important code — DO commit these):
+# ================================================================
+#
+#  app.py                     — Entry point
+#  config.py                  — Configuration
+#  requirements.txt           — Dependencies
+#  run.bat                    — Windows startup script
+#  setup.bat                  — Windows setup script
+#  Dockerfile                 — Container support
+#  render.yaml                — Render.com deployment config
+#  runtime.txt                — Python version for deployment
+#  .env.example               — Safe env template
+#  .gitattributes             — Git line ending settings
+#
+#  agents/                    — All AI agents (router, rag, math, etc.)
+#  rag/                       — RAG pipeline (loader, store, retriever, reranker)
+#  orchestrator/              — LangGraph state machine
+#  api/                       — Flask routes
+#  memory/                    — SQLite conversation memory
+#  utils/                     — Logger and helpers
+#  templates/                 — HTML pages (index, admin, admin_denied)
+#  static/                    — CSS, JS, avatar image
+#  data/knowledge/.gitkeep    — Keeps the knowledge folder tracked
+#  data/uploads/.gitkeep      — Keeps the uploads folder tracked
+#
+# ================================================================

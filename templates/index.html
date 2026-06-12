@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuldeep AI — Chat</title>
+    <meta name="description"
+        content="Chat with Kuldeep AI — a personal AI assistant powered by an advanced knowledge base.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=9">
+</head>
+
+<body class="light-theme" id="app-body">
+
+    <!-- Decorative background blobs (light mode only) -->
+    <div class="bg-blob bg-blob-tr"></div>
+    <div class="bg-blob bg-blob-bl"></div>
+    <div class="bg-dots"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Kuldeep AI</h3>
+            <button id="theme-toggle" title="Toggle Theme">
+                <i data-lucide="moon"></i>
+            </button>
+        </div>
+
+        <button id="new-chat-btn" class="sidebar-btn">
+            <i data-lucide="plus"></i> New Chat
+        </button>
+
+        <div class="sidebar-stats">
+            <div class="stat-item">
+                <span class="stat-label">Messages</span>
+                <span id="stat-messages" class="stat-value">0</span>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <button id="download-chat-btn" class="sidebar-btn secondary" disabled>
+                <i data-lucide="download"></i> Download Chat
+            </button>
+        </div>
+    </div>
+
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Main chat -->
+    <main class="chat-container">
+        <!-- Menu toggle (top-left card) -->
+        <button id="desktop-sidebar-toggle" class="desktop-sidebar-toggle" title="Menu">
+            <i data-lucide="menu"></i>
+        </button>
+
+        <!-- Mobile header -->
+        <div class="mobile-header">
+            <button id="mobile-menu-btn" class="icon-btn"><i data-lucide="menu"></i></button>
+            <span class="mobile-title">Kuldeep AI</span>
+        </div>
+
+        <!-- Welcome screen -->
+        <div id="welcome-screen" class="welcome-screen">
+            <div class="welcome-content">
+                <!-- Avatar with ring + online dot -->
+                <div class="avatar-ring-wrapper">
+                    <img src="{{ url_for('static', filename='ai-avatar.png') }}" alt="Kuldeep AI"
+                        class="welcome-avatar">
+                    <span class="online-dot"></span>
+                </div>
+
+                <h2 class="welcome-name">Kuldeep AI</h2>
+                <div class="welcome-divider"></div>
+                <h1 class="welcome-tagline"><span class="highlight">Ready</span> when you are.</h1>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div id="chat-messages" class="chat-messages"></div>
+
+        <!-- Input bar -->
+        <div id="input-container-wrapper" class="input-container-wrapper welcome-mode">
+            <div class="chat-input-container">
+                <i data-lucide="message-circle" class="input-icon"></i>
+                <textarea id="user-input" placeholder="Ask anything..." rows="1"></textarea>
+                <button id="send-btn" disabled>
+                    <i data-lucide="arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

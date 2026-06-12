@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuldeep AI — Admin Panel</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #0f0f11;
+            --surface: #18181b;
+            --surface2: #1f1f23;
+            --border: #2a2a30;
+            --text: #e4e4e7;
+            --muted: #71717a;
+            --accent: #10a37f;
+            --accent-hover: #0d8c6d;
+            --danger: #ef4444;
+            --danger-hover: #dc2626;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --success: #22c55e;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-logo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .header-badge {
+            background: rgba(16, 163, 127, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(16, 163, 127, 0.3);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-link:hover {
+            color: var(--text);
+            border-color: var(--accent);
+        }
+
+        .btn-link i {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ── Layout ── */
+        .main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* ── Stats bar ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .stat-card.accent .value {
+            color: var(--accent);
+        }
+
+        .stat-card.info .value {
+            color: var(--info);
+        }
+
+        .stat-card.warning .value {
+            color: var(--warning);
+        }
+
+        .stat-card.success .value {
+            color: var(--success);
+        }
+
+        /* ── Section ── */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+        }
+
+        .section-body {
+            padding: 1.4rem;
+        }
+
+        /* ── Upload zone ── */
+        .drop-zone {
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: var(--accent);
+            background: rgba(16, 163, 127, 0.05);
+        }
+
+        .drop-zone i {
+            width: 40px;
+            height: 40px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .drop-zone h4 {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .drop-zone p {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        .btn-browse {
+            margin-top: 12px;
+            padding: 8px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-browse:hover {
+            background: var(--accent-hover);
+        }
+
+        /* ── Upload progress ── */
+        .upload-progress {
+            margin-top: 1rem;
+        }
+
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-item i {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .progress-item.success i {
+            color: var(--success);
+        }
+
+        .progress-item.error i {
+            color: var(--danger);
+        }
+
+        .progress-item.loading i {
+            color: var(--muted);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ── Document table ── */
+        .doc-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .doc-table th {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--muted);
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .doc-table td {
+            padding: 12px 12px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.88rem;
+            vertical-align: middle;
+        }
+
+        .doc-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .doc-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .badge-knowledge {
+            background: rgba(16, 163, 127, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(16, 163, 127, 0.3);
+        }
+
+        .badge-uploaded {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--info);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-pdf {
+            background: rgba(239, 68, 68, 0.1);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .badge-txt {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .doc-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doc-name i {
+            width: 15px;
+            height: 15px;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        /* ── Action buttons ── */
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: rgba(16, 163, 127, 0.1);
+        }
+
+        .btn-icon.danger:hover {
+            color: var(--danger);
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .btn-icon i {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* ── Primary buttons ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .btn i {
+            width: 15px;
+            height: 15px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+
+        .btn-secondary {
+            background: var(--surface2);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 500;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 680px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+
+        .modal-header {
+            padding: 1.2rem 1.4rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-title i {
+            width: 16px;
+            height: 16px;
+            color: var(--accent);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .modal-close:hover {
+            color: var(--text);
+        }
+
+        .modal-body {
+            padding: 1.4rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.4rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* ── View content ── */
+        .content-view {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Inter', monospace;
+            color: var(--text);
+        }
+
+        /* ── Edit textarea ── */
+        .edit-area {
+            width: 100%;
+            min-height: 300px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            color: var(--text);
+            font-size: 0.85rem;
+            line-height: 1.7;
+            resize: vertical;
+            font-family: 'Inter', monospace;
+        }
+
+        .edit-area:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* ── Toast ── */
+        .toast-container {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .toast {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease;
+            max-width: 320px;
+        }
+
+        .toast.success {
+            border-color: var(--success);
+        }
+
+        .toast.error {
+            border-color: var(--danger);
+        }
+
+        .toast i {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        .toast.success i {
+            color: var(--success);
+        }
+
+        .toast.error i {
+            color: var(--danger);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ── Empty state ── */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+        }
+
+        .empty-state i {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 8px;
+            opacity: 0.4;
+        }
+
+        .empty-state p {
+            font-size: 0.85rem;
+        }
+
+        /* ── Loading spinner ── */
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <span class="header-logo">Kuldeep AI</span>
+            <span class="header-badge">ADMIN</span>
+        </div>
+        <div class="header-right">
+            <a href="/" class="btn-link">
+                <i data-lucide="message-square"></i> Go to Chat
+            </a>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <div class="main">
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card accent">
+                <div class="label">Total Chunks</div>
+                <div class="value" id="stat-chunks">—</div>
+            </div>
+            <div class="stat-card info">
+                <div class="label">Documents</div>
+                <div class="value" id="stat-docs">—</div>
+            </div>
+            <div class="stat-card success">
+                <div class="label">Base Knowledge</div>
+                <div class="value" id="stat-knowledge">—</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="label">Uploaded</div>
+                <div class="value" id="stat-uploads">—</div>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">
+                    <i data-lucide="upload-cloud"></i>
+                    Upload Documents
+                </span>
+                <span style="font-size:0.75rem;color:var(--muted);">PDF &amp; TXT supported</span>
+            </div>
+            <div class="section-body">
+                <input type="file" id="file-input" multiple accept=".pdf,.txt" hidden>
+                <div id="drop-zone" class="drop-zone">
+                    <i data-lucide="cloud-upload"></i>
+                    <h4>Drag &amp; drop files here</h4>
+                    <p>Upload .pdf or .txt files to the knowledge base</p>
+                    <button class="btn-browse" onclick="document.getElementById('file-input').click()">Browse
+                        Files</button>
+                </div>
+                <div id="upload-progress" class="upload-progress" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- Document Library -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-title">
+                    <i data-lucide="library"></i>
+                    Knowledge Base
+                </span>
+                <div style="display:flex;gap:8px;">
+                    <button class="btn btn-danger" id="clear-uploads-btn" onclick="clearUploads()">
+                        <i data-lucide="trash-2"></i> Clear Uploads
+                    </button>
+                </div>
+            </div>
+            <div class="section-body" style="padding:0;">
+                <div id="doc-list-container">
+                    <div class="empty-state" style="padding:2rem;">
+                        <i data-lucide="loader-2" class="spinner"></i>
+                        <p>Loading documents...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /main -->
+
+    <!-- View Modal -->
+    <div class="modal-overlay" id="view-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title"><i data-lucide="eye"></i> <span id="view-modal-title">View
+                        Document</span></span>
+                <button class="modal-close" onclick="closeModal('view-modal')"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="view-content" class="content-view">Loading...</div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('view-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="edit-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title"><i data-lucide="pencil"></i> <span id="edit-modal-title">Edit
+                        Document</span></span>
+                <button class="modal-close" onclick="closeModal('edit-modal')"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">
+                    Edit the content directly. Click Save to update the knowledge base.
+                </p>
+                <textarea id="edit-textarea" class="edit-area"></textarea>
+                <input type="hidden" id="edit-filename">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('edit-modal')">Cancel</button>
+                <button class="btn btn-primary" id="edit-save-btn" onclick="saveEdit()">
+                    <i data-lucide="save"></i> Save &amp; Re-index
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Re-upload Modal (for PDFs) -->
+    <div class="modal-overlay" id="reupload-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title"><i data-lucide="refresh-cw"></i> <span id="reupload-modal-title">Update
+                        PDF</span></span>
+                <button class="modal-close" onclick="closeModal('reupload-modal')"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.2rem;">
+                    Upload a new version of this PDF file. The old content will be replaced.
+                </p>
+                <input type="file" id="reupload-input" accept=".pdf" hidden>
+                <div id="reupload-zone" class="drop-zone" style="padding:1.5rem;"
+                    onclick="document.getElementById('reupload-input').click()">
+                    <i data-lucide="upload"></i>
+                    <h4>Select new PDF</h4>
+                    <p>Click to browse</p>
+                </div>
+                <input type="hidden" id="reupload-filename">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('reupload-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+        // ── State ──
+        let currentDocs = [];
+
+        // ── Init ──
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            loadStats();
+            loadDocuments();
+            setupDropZone();
+            setupReupload();
+        });
+
+        // ── Stats ──
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/admin/stats');
+                const data = await res.json();
+                document.getElementById('stat-chunks').textContent = data.total_chunks ?? '—';
+                document.getElementById('stat-docs').textContent = data.total_docs ?? '—';
+                document.getElementById('stat-knowledge').textContent = data.knowledge_count ?? '—';
+                document.getElementById('stat-uploads').textContent = data.upload_count ?? '—';
+            } catch (e) { console.error('Stats error:', e); }
+        }
+
+        // ── Documents ──
+        async function loadDocuments() {
+            const container = document.getElementById('doc-list-container');
+            try {
+                const res = await fetch('/api/documents');
+                const data = await res.json();
+                currentDocs = data.documents || [];
+                renderDocTable(currentDocs);
+            } catch (e) {
+                container.innerHTML = `<div class="empty-state"><p>Failed to load documents.</p></div>`;
+            }
+        }
+
+        function renderDocTable(docs) {
+            const container = document.getElementById('doc-list-container');
+            if (!docs.length) {
+                container.innerHTML = `
+                <div class="empty-state" style="padding:2rem;">
+                    <i data-lucide="inbox"></i>
+                    <p>No documents in knowledge base yet.</p>
+                </div>`;
+                lucide.createIcons();
+                return;
+            }
+
+            const rows = docs.map(doc => {
+                const originBadge = doc.origin === 'knowledge'
+                    ? `<span class="badge badge-knowledge">📁 Base</span>`
+                    : `<span class="badge badge-uploaded">⬆️ Uploaded</span>`;
+                const typeBadge = doc.file_type === 'pdf'
+                    ? `<span class="badge badge-pdf">PDF</span>`
+                    : `<span class="badge badge-txt">TXT</span>`;
+                const sizeStr = doc.size_bytes > 0
+                    ? (doc.size_bytes > 1024 ? (doc.size_bytes / 1024).toFixed(1) + 'KB' : doc.size_bytes + 'B')
+                    : '—';
+
+                // PDF gets re-upload, TXT gets inline edit
+                const editBtn = doc.file_type === 'txt'
+                    ? `<button class="btn-icon" title="Edit" onclick="openEdit('${doc.name}')"><i data-lucide="pencil"></i></button>`
+                    : `<button class="btn-icon" title="Update PDF" onclick="openReupload('${doc.name}')"><i data-lucide="refresh-cw"></i></button>`;
+
+                return `
+            <tr>
+                <td><span class="doc-name"><i data-lucide="file-text"></i>${doc.name}</span></td>
+                <td>${originBadge}</td>
+                <td>${typeBadge}</td>
+                <td>${sizeStr}</td>
+                <td>${doc.chunk_count} chunks</td>
+                <td>
+                    <div class="actions">
+                        <button class="btn-icon" title="View" onclick="openView('${doc.name}')"><i data-lucide="eye"></i></button>
+                        ${editBtn}
+                        <button class="btn-icon danger" title="Delete" onclick="deleteDoc('${doc.name}')"><i data-lucide="trash-2"></i></button>
+                    </div>
+                </td>
+            </tr>`;
+            }).join('');
+
+            container.innerHTML = `
+            <table class="doc-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Origin</th>
+                        <th>Type</th>
+                        <th>Size</th>
+                        <th>Chunks</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>`;
+            lucide.createIcons();
+        }
+
+        // ── Upload ──
+        function setupDropZone() {
+            const zone = document.getElementById('drop-zone');
+            const input = document.getElementById('file-input');
+
+            zone.addEventListener('click', () => input.click());
+            input.addEventListener('change', () => handleUpload(input.files));
+
+            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+            zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+            zone.addEventListener('drop', e => {
+                e.preventDefault(); zone.classList.remove('drag-over');
+                handleUpload(e.dataTransfer.files);
+            });
+        }
+
+        async function handleUpload(files) {
+            if (!files.length) return;
+            const progress = document.getElementById('upload-progress');
+            progress.style.display = 'block';
+            progress.innerHTML = '';
+
+            const formData = new FormData();
+            for (let f of files) formData.append('files', f);
+
+            // Show loading items
+            for (let f of files) {
+                progress.innerHTML += `
+                <div class="progress-item loading" id="prog-${f.name.replace(/\./g, '_')}">
+                    <i data-lucide="loader-2"></i>
+                    <span>${f.name} — Indexing...</span>
+                </div>`;
+            }
+            lucide.createIcons();
+
+            try {
+                const res = await fetch('/api/upload', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                (data.results || []).forEach(r => {
+                    const el = document.getElementById('prog-' + r.file.replace(/\./g, '_'));
+                    if (!el) return;
+                    if (r.status === 'indexed') {
+                        el.className = 'progress-item success';
+                        el.innerHTML = `<i data-lucide="check-circle"></i><span>${r.file} — ✓ ${r.chunks} chunks indexed</span>`;
+                    } else {
+                        el.className = 'progress-item error';
+                        el.innerHTML = `<i data-lucide="alert-circle"></i><span>${r.file} — ✗ ${r.reason || r.status}</span>`;
+                    }
+                });
+                lucide.createIcons();
+
+                showToast('Files uploaded successfully!', 'success');
+                await loadStats();
+                await loadDocuments();
+
+                setTimeout(() => { progress.style.display = 'none'; progress.innerHTML = ''; }, 4000);
+            } catch (e) {
+                showToast('Upload failed: ' + e.message, 'error');
+            }
+        }
+
+        // ── View modal ──
+        async function openView(filename) {
+            document.getElementById('view-modal-title').textContent = filename;
+            document.getElementById('view-content').textContent = 'Loading...';
+            openModal('view-modal');
+
+            try {
+                const res = await fetch(`/api/document/view?filename=${encodeURIComponent(filename)}`);
+                const data = await res.json();
+                document.getElementById('view-content').textContent = data.content || '(empty)';
+                if (data.note) {
+                    document.getElementById('view-content').textContent =
+                        `[${data.note}]\n\n` + (data.content || '');
+                }
+            } catch (e) {
+                document.getElementById('view-content').textContent = 'Error loading content.';
+            }
+        }
+
+        // ── Edit modal (TXT) ──
+        async function openEdit(filename) {
+            document.getElementById('edit-modal-title').textContent = filename;
+            document.getElementById('edit-filename').value = filename;
+            document.getElementById('edit-textarea').value = 'Loading...';
+            openModal('edit-modal');
+
+            try {
+                const res = await fetch(`/api/document/view?filename=${encodeURIComponent(filename)}`);
+                const data = await res.json();
+                document.getElementById('edit-textarea').value = data.content || '';
+            } catch (e) {
+                document.getElementById('edit-textarea').value = 'Error loading content.';
+            }
+        }
+
+        async function saveEdit() {
+            const filename = document.getElementById('edit-filename').value;
+            const content = document.getElementById('edit-textarea').value;
+            const btn = document.getElementById('edit-save-btn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i data-lucide="loader-2" class="spinner"></i> Saving...';
+            lucide.createIcons();
+
+            try {
+                const res = await fetch('/api/document/update', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename, content }),
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+                showToast(`${filename} saved & re-indexed (${data.chunk_count} chunks).`, 'success');
+                closeModal('edit-modal');
+                await loadStats();
+                await loadDocuments();
+            } catch (e) {
+                showToast('Save failed: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i data-lucide="save"></i> Save & Re-index';
+                lucide.createIcons();
+            }
+        }
+
+        // ── Re-upload modal (PDF) ──
+        function setupReupload() {
+            document.getElementById('reupload-input').addEventListener('change', async function () {
+                const f = this.files[0];
+                if (!f) return;
+                const filename = document.getElementById('reupload-filename').value;
+                const fd = new FormData();
+                fd.append('file', f, filename);
+
+                try {
+                    const res = await fetch('/api/document/update', { method: 'POST', body: fd });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error);
+                    showToast(`${filename} updated (${data.chunk_count} chunks).`, 'success');
+                    closeModal('reupload-modal');
+                    await loadStats();
+                    await loadDocuments();
+                } catch (e) {
+                    showToast('Update failed: ' + e.message, 'error');
+                }
+            });
+        }
+
+        function openReupload(filename) {
+            document.getElementById('reupload-modal-title').textContent = 'Update: ' + filename;
+            document.getElementById('reupload-filename').value = filename;
+            openModal('reupload-modal');
+        }
+
+        // ── Delete ──
+        async function deleteDoc(filename) {
+            if (!confirm(`Delete "${filename}" from the knowledge base?\n\nNote: Base knowledge files will be re-indexed on next server restart.`)) return;
+
+            try {
+                const res = await fetch('/api/delete_document', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename }),
+                });
+                const data = await res.json();
+                showToast(data.message || 'Deleted.', 'success');
+                await loadStats();
+                await loadDocuments();
+            } catch (e) {
+                showToast('Delete failed: ' + e.message, 'error');
+            }
+        }
+
+        // ── Clear uploads ──
+        async function clearUploads() {
+            if (!confirm('Clear all uploaded documents? Base knowledge files will be preserved.')) return;
+            try {
+                const res = await fetch('/api/clear', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ uploads_only: true }),
+                });
+                const data = await res.json();
+                showToast(data.message || 'Uploads cleared.', 'success');
+                await loadStats();
+                await loadDocuments();
+            } catch (e) {
+                showToast('Clear failed: ' + e.message, 'error');
+            }
+        }
+
+        // ── Modal helpers ──
+        function openModal(id) {
+            document.getElementById(id).classList.add('open');
+            lucide.createIcons();
+        }
+        function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+        // ── Toast ──
+        function showToast(msg, type = 'success') {
+            const tc = document.getElementById('toast-container');
+            const icon = type === 'success' ? 'check-circle' : 'alert-circle';
+            const el = document.createElement('div');
+            el.className = `toast ${type}`;
+            el.innerHTML = `<i data-lucide="${icon}"></i><span>${msg}</span>`;
+            tc.appendChild(el);
+            lucide.createIcons();
+            setTimeout(() => el.remove(), 4000);
+        }
+    </script>
+</body>
+
+</html>

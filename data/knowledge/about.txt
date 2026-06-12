@@ -1,0 +1,67 @@
+# About Kuldeep Kumar Mishra
+
+## Identity & Role
+Name: Kuldeep Kumar Mishra
+Role: AI Engineer
+Specialization: Generative AI, Large Language Models (LLMs), Retrieval-Augmented Generation (RAG), Agentic AI, Machine Learning, Deep Learning, Computer Vision, Data Science, and Intelligent Automation
+Location: Darbhanga, Bihar, India
+Origin: Mithilanchal region of Bihar, Darbhanga district
+
+Personal Philosophy: "The goal isn't to build models. The goal is to build intelligence that matters."
+
+## Early Life and Background
+
+Kuldeep Kumar Mishra was born and raised in the Mithilanchal region of Bihar, specifically in Darbhanga district. He comes from a humble agricultural family with strong values centered around education, hard work, discipline, and continuous learning. His father, Ramesh Mishra, is primarily engaged in farming and also manages a small general store that supports the family's livelihood. Kuldeep belongs to a joint family with deep roots in the Mithila region and grew up in an environment that emphasized perseverance, responsibility, and academic excellence.
+
+His grandfather, Late Pitambar Mishra, was a respected elder of the family whose values and legacy continue to inspire future generations. Kuldeep comes from a family of eight members, including his parents, four elder sisters, a younger brother, and himself.
+
+## School Education
+
+Kuldeep began his educational journey at Rajkiya Madhya Vidyalaya, Asi, Darbhanga, where he completed his primary and middle school education from Class 1 through Class 8. During these formative years, he developed a strong interest in mathematics and analytical thinking.
+
+After completing middle school, he continued his education at +2 High School, Asi, Darbhanga. During his secondary and higher secondary education, his interest in mathematics became increasingly strong, motivating him to pursue higher studies in the subject.
+
+## Undergraduate Education
+
+Following his school education, Kuldeep enrolled in the Bachelor of Science (B.Sc.) Mathematics Honours program at Lalit Narayan Mithila University (LNMU), Darbhanga, where he studied from 2019 to 2022. During his undergraduate years, he built a strong foundation in mathematical disciplines including calculus, linear algebra, differential equations, probability, statistics, and mathematical reasoning.
+
+Alongside his university studies, he received additional academic guidance from Pankaj Kumar B.Sc. Mathematics Coaching, where he further strengthened his mathematical problem-solving abilities and competitive examination preparation.
+
+To support himself and gain teaching experience, Kuldeep also worked as a home tutor during his B.Sc. studies. He taught Mathematics to students of Classes 11 and 12, helping them prepare for board examinations and competitive tests. This experience improved his communication skills, teaching abilities, leadership qualities, and conceptual understanding of mathematics.
+
+## Academic Achievement
+
+Kuldeep's dedication to mathematics and analytical thinking culminated in a major academic achievement when he secured All India Rank (AIR) 1180 in IIT JAM Mathematics 2024 among approximately 15,000 candidates across India. This accomplishment earned him admission to the prestigious Indian Institute of Information Technology (IIIT) Lucknow.
+
+## Postgraduate Education
+
+In August 2024, Kuldeep began his Master of Science (M.Sc.) in Data Science at the Indian Institute of Information Technology (IIIT) Lucknow. The program concluded in July 2026. During his postgraduate studies, he transitioned from pure mathematics into advanced fields including Artificial Intelligence, Machine Learning, Deep Learning, Generative AI, Large Language Models, Retrieval-Augmented Generation (RAG), Agentic AI, Data Engineering, Cloud Computing, and Intelligent Systems.
+
+The rigorous mathematical foundation developed during his undergraduate years became a key strength in understanding and implementing advanced AI algorithms, optimization techniques, machine learning models, and intelligent systems.
+
+## Personal Journey
+
+Kuldeep's journey reflects a progression from a village in the Mithilanchal region of Bihar to becoming an AI Engineer working on advanced technologies such as Agentic AI, Large Language Models, Multi-Agent Systems, Retrieval-Augmented Generation, Computer Vision, and Intelligent Automation. His story demonstrates how strong fundamentals in mathematics, consistent self-learning, teaching experience, and dedication to technology can create opportunities for growth and innovation.
+
+His professional mission is to build intelligent systems that reason, act, learn, and create meaningful real-world impact. This philosophy is reflected in his personal motto:
+
+"The goal isn't to build models. The goal is to build intelligence that matters."
+
+## Core Areas of Interest
+- Generative AI and Large Language Models
+- Agentic AI and Multi-Agent Systems
+- Retrieval-Augmented Generation (RAG)
+- Autonomous Agents
+- Computer Vision
+- Intelligent Automation
+- AI Product Development
+- Machine Learning Infrastructure
+- Enterprise AI Solutions
+
+## Long-Term Goal
+Design and build intelligent systems capable of reasoning, learning, retrieving knowledge, planning actions, and solving complex real-world problems at scale.
+
+## Community & Content
+- YouTube Channel: AI Simplified — shares educational content on AI, ML, Generative AI, and emerging technologies
+- Active contributor on Hugging Face, GitHub, and LinkedIn
+- Believes in continuous learning, practical implementation, and sharing knowledge with the broader community

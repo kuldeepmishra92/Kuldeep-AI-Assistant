@@ -1,0 +1,68 @@
+# Social Links & Contact Information — Kuldeep Kumar Mishra
+
+## Professional Contact
+
+Name: Kuldeep Kumar Mishra
+Role: AI Engineer
+Location: Darbhanga, Bihar, India
+
+Email: kuldeep.mishra207192@gmail.com
+Phone: +91-7546969920
+
+---
+
+## Online Profiles & Portfolio
+
+### Portfolio Website
+URL: https://p-ortfolio-pzj5.vercel.app
+Description: Personal portfolio showcasing AI projects, skills, experience, and background
+
+### GitHub
+URL: https://github.com/kuldeepmishra92
+Username: kuldeepmishra92
+Description: Open-source code, AI/ML projects, and implementations
+
+### Hugging Face
+URL: https://huggingface.co/Kuldeepmishra3
+Username: Kuldeepmishra3
+Description: Published AI models and Spaces including Skin Cancer Classifier, Multi-Agent Chatbot, and University Rankings platform
+
+### LinkedIn
+URL: https://www.linkedin.com/in/kuldeep-kumar-mishra-6a8866324
+Username: kuldeep-kumar-mishra-6a8866324
+Description: Professional networking, career updates, and technical articles
+
+### YouTube
+Channel Name: AI Simplified
+Description: Educational content on Artificial Intelligence, Machine Learning, Generative AI, and emerging technologies
+Purpose: Sharing knowledge with the AI/ML community
+
+### Instagram
+Username: kuldeep.mishra20
+URL: https://www.instagram.com/kuldeep.mishra20
+
+---
+
+## Availability & Opportunities
+
+Kuldeep is open to:
+- AI Engineering positions (full-time or contract)
+- Generative AI roles and LLM engineering
+- Research collaborations in AI/ML
+- Freelance AI/ML projects
+- Startup opportunities in AI product development
+- Innovative AI consulting and advisory
+
+Best way to contact: Email at kuldeep.mishra207192@gmail.com or LinkedIn message
+
+---
+
+## Published Work
+
+### Hugging Face Models
+- vit-large-skin-cancer-ham10000: Medical image classification model for skin cancer detection
+
+### Hugging Face Spaces (Applications)
+- Skin Cancer Classifier: https://huggingface.co/spaces/Kuldeepmishra3/skin-cancer-classifier
+- Multi-Agent RAG Chatbot: Deployed on Hugging Face Spaces
+- World University Rankings: Data analytics platform
