@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: multi-agent-rag-chatbot
+    runtime: python
+    region: singapore        # closest to India for low latency
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # Set manually in Render dashboard → Environment
+      - key: GROQ_MODEL_NAME
+        value: llama-3.1-8b-instant
+      - key: EMBEDDING_MODEL
+        value: all-MiniLM-L6-v2
+      - key: CHROMA_DB_PATH
+        value: /tmp/chroma_db
+      - key: SQLITE_DB_PATH
+        value: /tmp/chat_memory.db
+      - key: CHUNK_SIZE
+        value: "500"
+      - key: CHUNK_OVERLAP
+        value: "50"
+      - key: TOP_K_RETRIEVAL
+        value: "5"
+      - key: PYTHONUNBUFFERED
+        value: "1"           # Ensures logs appear in Render dashboard in real-time
